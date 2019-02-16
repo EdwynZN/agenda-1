@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN' 'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+
+<mapper namespace='net.tecgurus.agenda.mappers.ContactoMapper'>
+	<select id='search' parameterType='String' resultType='net.tecgurus.agenda.model.Contacto'>
+		SELECT * FROM contactos WHERE id_usuario = #{id}
+		<if test="search != null"> 
+			<bind name="fixSearch" value="'%' + search + '%'" /> 
+			AND nombre LIKE #{fixSearch} OR apellido LIKE #{fixSearch}
+		</if>
+	</select>
+	
+	<select id='searchCount' parameterType="int" resultType='Long'>
+		SELECT count(*) FROM contactos WHERE id_usuario = #{id}
+		<if test="search != null"> 
+			<bind name="fixSearch" value="'%' + search + '%'" /> 
+			AND nombre LIKE #{fixSearch} OR apellido LIKE #{fixSearch}
+		</if>
+	</select>
+</mapper>

@@ -1,0 +1,75 @@
+
+body { padding-bottom: 70px; }
+.contact-data{
+    height: 25px;
+}
+
+.container {
+    margin-bottom: 2%;
+}
+
+.my-card{
+    border-radius: 5%;
+    margin: 20px;
+    width: 220px;
+    height: 270px;
+    border:1px solid #dfdfdf;
+    padding: 5px;
+}
+
+.my-card:hover{
+    box-shadow: 10px 9px 20px -12px rgba(0, 0, 0, 0.75);
+}
+
+.img-container {
+    margin-bottom: 15px;
+}
+
+.avatar-container {
+    margin: 10px;
+    padding: 25px;
+}
+
+header {
+    height: 65px;
+}
+
+.contacts-container {
+    display: flex;   
+    flex-wrap: wrap;
+    border-width: 20px;
+    border-color: grey;
+    justify-content: center;
+}
+
+.my-body-card {
+    padding: 10px;
+}
+
+.my-body-card:hover{
+    cursor: pointer;
+}
+
+p {
+    margin: 0;
+}
+
+.btn-close {
+    padding: 0;
+}
+
+.nav-bar-img {
+    padding: 0;
+    margin-right: 25px;
+}
+
+.nav-var-user-data {
+    padding: 0;
+    font-size: 10px;
+    margin-right: 10px;
+}
+
+footer {
+  height: 45px;
+  background-color: #f5f5f5;
+}
