@@ -48,12 +48,10 @@ public @Log class UploadFilesService {
 			//obtenemos todas las partes de nuestro request multipart
 			List<FileItem> items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
 			
-			
 			/***************************************************************
 			 * Cada Item en el arreglo es un parametro dentro de la petición, 
 			 * se espera una imagen por cada item.
 			 ***************************************************************/
-			
 			//Se itera sobre cada parte de la petición.
 			for (FileItem item : items) {
 				

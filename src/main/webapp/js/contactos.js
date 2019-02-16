@@ -2,10 +2,9 @@ $(function(){
     $(document).ready(function(){
     	search("search", 1, 8, 1, "")
     	
-    	
     	//Se asigna el evento de click a las cards.
 	    $('body').on("click", ".my-body-card", function(e){
-	        e.preventDefault();
+	        e.preventDefault()
 	        $("#title").text("")
 	        $('#modalUserInfo').modal('toggle');//open modal
 	        idContact = $(this).data('id');
@@ -20,7 +19,7 @@ $(function(){
 	        e.preventDefault();
 	        guardarContacto()
 	        $("#title").text("Agregar Contacto")
-	        $('#modalUserInfo').modal('toggle');//open modal
+	        $('#modalUserInfo').modal('toggle')//open modal
 	        console.log("agregar");
 	    });
 	    
@@ -89,7 +88,14 @@ $(function(){
 						console.log('page: '+page)
 				   	  	var searchValue = $('#searchTxt').val()
 				   	  	search("search", 1, 8, page, searchValue)
-					});
+					})
+					.fail(function(error){
+						Swal.fire(
+					      'Upps!!',
+					      'Algo salio mal',
+					      'error'
+					    )
+					})
 			  }
 			})
 		  })
@@ -228,7 +234,7 @@ function guardarContacto(){
 		//Petición asincrona para guardar un contacto.
 		$.ajax({
 			url:"ContactoController",
-			type: 'GET',
+			type: 'POST',
 			data: $(this).serialize(),
 			dataType: 'json'
 		})
@@ -283,20 +289,13 @@ function actualizarContacto(idContacto){
 		 
 		$.ajax({
 			url:"ContactoController",
-			type: 'GET',
+			type: 'POST',
 			data: data,
 			dataType: 'json'
 		})
 		.done(function(response){
 			console.log("correcto");
 			console.log(response);
-			/*$("#title").text("Editar");
-			$("#nombre").val(response.nombre);
-			$("#apellidos").val(response.apellido);
-			$("#direccion").val(response.direccion);
-			$("#telefono").val(response.telefono);
-			$("#email").val(response.email);
-			document.getElementById("cumple").valueAsDate = new Date(response.fechaNacimiento)*/
 			
 			$('#modalUserInfo').modal('hide')
 			
@@ -329,10 +328,6 @@ function subirFoto(idUser, idContacto){
 		console.log(archivos)
 		var fd = new FormData();
 		fd.append('file', archivos[0])
-		/*fd.append('idUser', idUser)
-		fd.append('idContacto', idContacto)*/
-		
-		console.log(fd)
 		
 		$.ajax({
 			url:'UploadFilesController?idUser='+idUser+'&idContacto='+idContacto,
@@ -342,6 +337,11 @@ function subirFoto(idUser, idContacto){
 			type: 'POST'
 		})
 		.done(function(){
+			
+			var page = $('#actualPage').data('id')
+	   	  	var searchValue = $('#searchTxt').val()
+			search("search", 1, 8, page, searchValue)
+			
 			Swal.fire({
 			  type: 'success',
 			  title: 'Imagen guardada correctamente',
